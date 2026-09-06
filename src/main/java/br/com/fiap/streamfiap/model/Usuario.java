@@ -10,6 +10,8 @@ import jakarta.persistence.*;
 public class Usuario {
 
     @Id
+    // ID não é gerado automaticamente
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Long id;
 
     private String nome;
