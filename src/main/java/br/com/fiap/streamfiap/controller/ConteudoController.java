@@ -57,6 +57,10 @@ public class ConteudoController {
     // POST /api/conteudos/filme - cadastra um filme (cria nova instância sem o id vindo do cliente)
     @PostMapping("/filme")
     public ResponseEntity<Filme> cadastrarFilme(@RequestBody Filme filme) {
+        if (filme.duracaoMinutos <= 0) {
+            throw new IllegalArgumentException("A duração do filme deve ser maior que zero minutos!");
+        }
+
         Filme novo = new Filme(filme.getTitulo(), filme.getCategoria(), filme.duracaoMinutos,
                 filme.getClassificacaoEtaria(), filme.isDisponivel(), filme.isEstreia());
         return ResponseEntity.status(201).body(conteudoRepository.save(novo));
@@ -65,6 +69,9 @@ public class ConteudoController {
     // POST /api/conteudos/serie - cadastra uma série
     @PostMapping("/serie")
     public ResponseEntity<Serie> cadastrarSerie(@RequestBody Serie serie) {
+        if (serie.duracaoMinutos <= 0) {
+            throw new IllegalArgumentException("A duração da serie deve ser maior que zero minutos!");
+        }
         Serie nova = new Serie(serie.getTitulo(), serie.getCategoria(), serie.duracaoMinutos,
                 serie.getClassificacaoEtaria(), serie.getNumeroTemporadas(), serie.isDisponivel());
         return ResponseEntity.status(201).body(conteudoRepository.save(nova));
@@ -73,6 +80,9 @@ public class ConteudoController {
     // POST /api/conteudos/documentario - cadastra um documentário
     @PostMapping("/documentario")
     public ResponseEntity<Documentario> cadastrarDocumentario(@RequestBody Documentario documentario) {
+        if (documentario.duracaoMinutos <= 0) {
+            throw new IllegalArgumentException("A duração do documentario deve ser maior que zero minutos!");
+        }
         Documentario novo = new Documentario(documentario.getTitulo(), documentario.getCategoria(),
                 documentario.duracaoMinutos, documentario.getClassificacaoEtaria(),
                 documentario.isDisponivel(), documentario.getTema());
