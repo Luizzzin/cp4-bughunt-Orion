@@ -22,11 +22,11 @@ public abstract class Conteudo {
     }
 
     protected Conteudo(String titulo, String categoria, int duracaoMinutos, int classificacaoEtaria, boolean disponivel) {
-        this.titulo = titulo;
-        this.categoria = categoria;
-        this.duracaoMinutos = duracaoMinutos;
-        this.classificacaoEtaria = classificacaoEtaria;
-        this.disponivel = disponivel;
+        this.setTitulo(titulo);
+        this.setCategoria(categoria);
+        this.setDuracaoMinutos(duracaoMinutos);
+        this.setClassificacaoEtaria(classificacaoEtaria);
+        this.setDisponivel(disponivel);
     }
 
     public double calcularPrecoAluguel() {

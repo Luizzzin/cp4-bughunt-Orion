@@ -66,7 +66,7 @@ public class ConteudoController {
         if (serie.duracaoMinutos <= 0) {
             throw new IllegalArgumentException("A duração da serie deve ser maior que zero minutos!");
         }
-        Serie nova = new Serie(serie.getTitulo(), serie.getCategoria(), serie.duracaoMinutos,
+        Serie nova = new Serie(serie.getTitulo(), serie.getCategoria(), serie.getDuracaoMinutos(),
                 serie.getClassificacaoEtaria(), serie.getNumeroTemporadas(), serie.isDisponivel());
         return ResponseEntity.status(201).body(conteudoRepository.save(nova));
     }
