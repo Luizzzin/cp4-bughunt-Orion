@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -51,11 +50,11 @@ public class ConteudoController {
     // POST /api/conteudos/filme - cadastra um filme (cria nova instância sem o id vindo do cliente)
     @PostMapping("/filme")
     public ResponseEntity<Filme> cadastrarFilme(@RequestBody Filme filme) {
-        if (filme.duracaoMinutos <= 0) {
+        if (filme.getDuracaoMinutos() <= 0) {
             throw new IllegalArgumentException("A duração do filme deve ser maior que zero minutos!");
         }
 
-        Filme novo = new Filme(filme.getTitulo(), filme.getCategoria(), filme.duracaoMinutos,
+        Filme novo = new Filme(filme.getTitulo(), filme.getCategoria(), filme.getDuracaoMinutos(),
                 filme.getClassificacaoEtaria(), filme.isDisponivel(), filme.isEstreia());
         return ResponseEntity.status(201).body(conteudoRepository.save(novo));
     }
@@ -63,7 +62,7 @@ public class ConteudoController {
     // POST /api/conteudos/serie - cadastra uma série
     @PostMapping("/serie")
     public ResponseEntity<Serie> cadastrarSerie(@RequestBody Serie serie) {
-        if (serie.duracaoMinutos <= 0) {
+        if (serie.getDuracaoMinutos() <= 0) {
             throw new IllegalArgumentException("A duração da serie deve ser maior que zero minutos!");
         }
         Serie nova = new Serie(serie.getTitulo(), serie.getCategoria(), serie.getDuracaoMinutos(),
@@ -74,11 +73,11 @@ public class ConteudoController {
     // POST /api/conteudos/documentario - cadastra um documentário
     @PostMapping("/documentario")
     public ResponseEntity<Documentario> cadastrarDocumentario(@RequestBody Documentario documentario) {
-        if (documentario.duracaoMinutos <= 0) {
+        if (documentario.getDuracaoMinutos() <= 0) {
             throw new IllegalArgumentException("A duração do documentario deve ser maior que zero minutos!");
         }
         Documentario novo = new Documentario(documentario.getTitulo(), documentario.getCategoria(),
-                documentario.duracaoMinutos, documentario.getClassificacaoEtaria(),
+                documentario.getDuracaoMinutos(), documentario.getClassificacaoEtaria(),
                 documentario.isDisponivel(), documentario.getTema());
         return ResponseEntity.status(201).body(conteudoRepository.save(novo));
     }
