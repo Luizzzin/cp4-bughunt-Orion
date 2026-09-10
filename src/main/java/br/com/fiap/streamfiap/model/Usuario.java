@@ -18,13 +18,11 @@ public class Usuario {
     private int idade;
     private double creditos;
 
-    public Usuario() {
-    }
-
-    public Usuario(String nome, int idade, double creditos) {
-        this.nome = nome; //ajustando this
-        this.idade = idade;
-        this.creditos = creditos;
+    public Usuario(String nome, int idade, double creditos, Long id) {
+        this.setNome(nome);
+        this.setIdade(idade);
+        this.setCreditos(creditos);
+        this.setId(id);
     }
 
     public boolean temCreditosSuficientes(double preco) {
