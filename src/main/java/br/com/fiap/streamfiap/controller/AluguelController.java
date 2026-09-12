@@ -29,7 +29,18 @@ public class AluguelController {
         Conteudo conteudo = conteudoRepository.findById(conteudoId)
                 .orElseThrow(() -> new ConteudoNaoEncontradoException("Conteúdo não encontrado: " + conteudoId));
 
+        double preco = conteudo.calcularPrecoAluguel();
+
         Usuario usuarioAtualizado = usuario.alugar(conteudo);
+
+        System.out.println("==================================================");
+        System.out.println("RECIBO STREAMFIAP");
+        System.out.println("Usuario: " + usuarioAtualizado.getNome());
+        System.out.println("Conteudo: " + conteudo.getTitulo());
+        System.out.println("Valor pago: R$ " + preco);
+        System.out.println("Creditos restantes: R$ " + usuarioAtualizado.getCreditos());
+        System.out.println("Obrigado por usar o StreamFIAP!");
+        System.out.println("==================================================");
 
         conteudoRepository.save(conteudo);
         return ResponseEntity.ok(usuarioRepository.save(usuarioAtualizado));
